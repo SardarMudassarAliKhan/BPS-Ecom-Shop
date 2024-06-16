@@ -1,0 +1,56 @@
+﻿@tagHelperPrefix "custom:"
+
+@{
+    ViewData["Title"] = "Shopping cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ShoppingCartViewModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">Your shopping cart</h2>
+    <h4>Here are the delicious pies in your shopping cart.</h4>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Image</th>
+                <th>Pie</th>
+                <th class="text-center">Selected amount</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td class="text-center">
+                        <img src="@Url.Content(line.Pie.ImageUrl)" alt="@line.Pie.Name" class="img-thumbnail" style="width: 100px; height: auto;">
+                    </td>
+                    <td class="align-middle">@line.Pie.Name</td>
+                    <td class="text-center align-middle">@line.Amount</td>
+                    <td class="text-right align-middle">@line.Pie.Price.ToString("c")</td>
+                    <td class="text-right align-middle">
+                        @((line.Amount * line.Pie.Price).ToString("c"))
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right font-weight-bold">Total:</td>
+                <td class="text-right font-weight-bold">
+                    @Model.ShoppingCartTotal.ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="progress my-4">
+        <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">33%</div>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-primary btn-lg" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+    </div>
+</div>

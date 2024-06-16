@@ -1,0 +1,20 @@
+﻿@model PieViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Index";
+    Layout= "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h1 class="text-center">Welcome to Bethany's Pie Shop</h1>
+    <p class="text-center">We offer a wide variety of delicious pies. Browse through our selection and choose your favorite!</p>
+    @Model.CurrentCategory
+    <div class="row">
+        @foreach (var pie in Model.pies)
+        {
+            <partial name="_PieHome" model="pie" />
+        }
+    </div>
+</div>
+

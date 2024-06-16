@@ -1,0 +1,16 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home page";
+    Layout= "~/Views/Shared/_Layout.cshtml";
+}
+<partial name="_Carousel" />
+<div class="container">
+    <h1 class="text-center">Welcome to Bethany's Pie Shop</h1>
+    <p class="text-center">We offer a wide variety of delicious pies. Browse through our selection and choose your favorite!</p>
+    <div class="row">
+        @foreach (var pie in Model.PiesOfTheWeek)
+        {
+           <partial name="_PieHome" model="pie" />
+        }
+    </div>
+</div>
