@@ -7,6 +7,11 @@ namespace BPS_Ecom_Shop.ViewModels
         public IEnumerable<Pie> pies { get; set; }
         public string CurrentCategory { get; set; }
 
+        public PieViewModel()
+        {
+             
+        }
+
         public PieViewModel(IEnumerable<Pie> pies , string CurrentCategory)
         {
             this.pies = pies;

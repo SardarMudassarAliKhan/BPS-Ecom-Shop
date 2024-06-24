@@ -8,9 +8,9 @@ namespace BPS_Ecom_Shop.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IPieRepository pieRepository;
-        private readonly IShoppingCart shoppingCartRepo;
+        private readonly IShoppingCartRepository shoppingCartRepo;
 
-        public ShoppingCartController(IPieRepository pieRepository, IShoppingCart shoppingCartRepo)
+        public ShoppingCartController(IPieRepository pieRepository, IShoppingCartRepository shoppingCartRepo)
         {
             //this.shoppingCart = shoppingCart;
             this.pieRepository = pieRepository;

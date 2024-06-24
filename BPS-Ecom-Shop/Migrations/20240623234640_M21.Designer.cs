@@ -4,6 +4,7 @@ using BPS_Ecom_Shop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BPS_Ecom_Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240623234640_M21")]
+    partial class M21
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,34 +188,6 @@ namespace BPS_Ecom_Shop.Migrations
                     b.ToTable("Pies");
                 });
 
-            modelBuilder.Entity("BPS_Ecom_Shop.Models.PieGiftOrder", b =>
-                {
-                    b.Property<int>("PieGiftOrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PieGiftOrderId"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PieGiftOrderId");
-
-                    b.HasIndex("PieId");
-
-                    b.ToTable("PieGiftOrders");
-                });
-
             modelBuilder.Entity("BPS_Ecom_Shop.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("ShoppingCartItemId")
@@ -266,17 +241,6 @@ namespace BPS_Ecom_Shop.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("BPS_Ecom_Shop.Models.PieGiftOrder", b =>
-                {
-                    b.HasOne("BPS_Ecom_Shop.Models.Pie", "Pie")
-                        .WithMany()
-                        .HasForeignKey("PieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pie");
                 });
 
             modelBuilder.Entity("BPS_Ecom_Shop.Models.ShoppingCartItem", b =>

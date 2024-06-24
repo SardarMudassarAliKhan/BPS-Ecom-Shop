@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BPS_Ecom_Shop.Repositories
 {
-    public class ShoppingCartRepository : IShoppingCart
+    public class ShoppingCartRepository : IShoppingCartRepository
     {
         public string? ShoppingCartId { get; set; }
 

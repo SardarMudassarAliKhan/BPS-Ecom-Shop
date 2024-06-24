@@ -3,6 +3,7 @@ using BPS_Ecom_Shop.IRepositories;
 using BPS_Ecom_Shop.Repositories;
 using BPS_Ecom_Shop.SeedData;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +14,19 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Repositories DI 
-builder.Services.AddScoped<IPieRepository, PieRepository>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IShoppingCart, ShoppingCartRepository>(sc => ShoppingCartRepository.GetCart(sc));
+builder.Services.AddTransient<IPieRepository, PieRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>(sc => ShoppingCartRepository.GetCart(sc));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession();
 //Add IHttpContextAccessorSession
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 

@@ -2,7 +2,7 @@
 
 namespace BPS_Ecom_Shop.IRepositories
 {
-    public interface IShoppingCart
+    public interface IShoppingCartRepository
     {
         void AddToCart(Pie pie, int amount);
         int RemoveFromCart(Pie pie);

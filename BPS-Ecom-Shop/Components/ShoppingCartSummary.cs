@@ -6,9 +6,9 @@ namespace BPS_Ecom_Shop.Components
 {
     public class ShoppingCartSummary : ViewComponent
     {
-        public IShoppingCart ShoppingCart { get; }
+        public IShoppingCartRepository ShoppingCart { get; }
 
-        public ShoppingCartSummary(IShoppingCart shoppingCart)
+        public ShoppingCartSummary(IShoppingCartRepository shoppingCart)
         {
             ShoppingCart = shoppingCart;
         }
