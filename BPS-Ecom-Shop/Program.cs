@@ -4,6 +4,7 @@ using BPS_Ecom_Shop.Repositories;
 using BPS_Ecom_Shop.SeedData;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddRazorPages();
 
 //Add Db Context
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
 
 //Repositories DI 
 builder.Services.AddTransient<IPieRepository, PieRepository>();
@@ -49,6 +52,7 @@ app.MapRazorPages();
 
 // Use IHttpContextAccessor 
 app.UseSession();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

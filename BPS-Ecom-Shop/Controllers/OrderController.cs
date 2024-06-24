@@ -17,15 +17,15 @@ namespace BPS_Ecom_Shop.Controllers
             _shoppingCart = shoppingCart;
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult Checkout()
         {
             return View();
         }
 
         [HttpPost]
-        //[Authorize]
-        //[Authorize(Policy = "MinimumOrderAge")]
+        [Authorize]
+        [Authorize(Policy = "MinimumOrderAge")]
         public IActionResult Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();
